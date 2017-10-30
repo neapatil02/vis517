@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Project 2</title>
+<style>
+/*ComChart*/
+text {
+  font: 10px sans-serif;
+}
+
+rect.background {
+  fill: white;
+}
+
+.axis {
+  shape-rendering: crispEdges;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+}
+/*USMap*/
+    .hoverinfo {   
+    position: absolute;           
+    text-align: center;
+    padding: 20px;             
+    margin: 10px;
+    font: 12px sans-serif;        
+    background: lightsteelblue;   
+    border: 1px;      
+    border-radius: 2px;           
+    pointer-events: none;         
+  }
+  .hoverinfo{
+   
+     background:rgba(0,0,0,0.9);
+    border:1px solid grey;
+    border-radius:5px;
+    font-size:12px;
+    width:auto;
+    padding:4px;
+    color:black;
+    opacity:0.8;
+
+  }
+  .hoverinfo h4{
+    margin:0;
+    font-size:14px;
+  }
+
+</style>
+</head>
+<body>
+<script src="//d3js.org/d3.v3.min.js"></script>
+<!-- USMap -->
+<script src="http://datamaps.github.io/scripts/d3.min.js"></script>
+<script src="http://datamaps.github.io/scripts/topojson.js"></script>
+<script src="http://datamaps.github.io/scripts/0.4.4/datamaps.usa.min.js"></script>
+
+<div id="navigation"></div>
+<!-- <script src="navigation.js"></script> -->
+<div id="IETotal"></div>
+<!-- <script src="IETotal.js"></script> -->
+
+<div id="USMap" style="position: relative; width: 1000px; height: 800px;"></div>
+<script src="USMap.js"></script>
+<div id="ComChart"></div>
+<script src="ComChart.js"></script>
+<!-- <script src="ExampleComChart.js"></script> -->
+<div id="WorldMap"></div>
+<!-- <script src="WorldMap.js"></script> -->
+
+
+
+</body>
+</html>
