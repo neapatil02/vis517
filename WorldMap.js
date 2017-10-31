@@ -42,13 +42,9 @@ function createWorldMap (state) {
                                     datamap.svg.selectAll("g").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
                                 }
 
-                                // datamap.svg.selectAll("path").on('mouseover', function(info) {debugger;
-                                
-                                // });
                             },
                           geographyConfig: {
                                             popupTemplate: function(geo, data) {
-                                              debugger;
                                               $("#WorldMapInfo").empty();
                                               if(data != null){
                                                 $("#WorldMapInfo").append(
@@ -196,7 +192,7 @@ var color = d3.scale.threshold()
 function calcValueAccordingToYear(data,year)
 {
   var val = 0;
-  switch(year)
+  switch(parseInt(year))
   {
     case 0 : val = (parseFloat(data.val2013)+parseFloat(data.val2014)+parseFloat(data.val2015)+parseFloat(data.val2016)).toFixed(2);
     break;
