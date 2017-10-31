@@ -33,15 +33,26 @@ for(var i=0;i<1430;i++)
   if(data[i]["abbreviatn"]=='World')
     {
       
-      export2013=parseFloat(parseFloat(data[i]["val2013"]).toFixed(2))+parseFloat(parseFloat(export2013).toFixed(2));
-       export2014=parseFloat(parseFloat(data[i]["val2014"]).toFixed(2))+parseFloat(parseFloat(export2014).toFixed(2));
-        export2015=parseFloat(parseFloat(data[i]["val2015"]).toFixed(2))+parseFloat(parseFloat(export2015).toFixed(2));
-         export2016=parseFloat(parseFloat(data[i]["val2016"]).toFixed(2))+parseFloat(parseFloat(export2016).toFixed(2));
+      export2013=parseFloat(data[i]["val2013"])+parseFloat(export2013);
+       export2014=parseFloat(data[i]["val2014"])+parseFloat(export2014);
+        export2015=parseFloat(data[i]["val2015"])+parseFloat(export2015);
+         export2016=parseFloat(data[i]["val2016"])+parseFloat(export2016);
 
-     import2013=parseFloat(parseFloat(data[i]["val2013"]).toFixed(2))+parseFloat(parseFloat(import2013).toFixed(2));
-       import2014=parseFloat(parseFloat(data[i]["val2014"]).toFixed(2))+parseFloat(parseFloat(import2014).toFixed(2));
-        import2015=parseFloat(parseFloat(data[i]["val2015"]).toFixed(2))+parseFloat(parseFloat(import2015).toFixed(2));
-         import2016=parseFloat(parseFloat(data[i]["val2016"]).toFixed(2))+parseFloat(parseFloat(import2016).toFixed(2));
+     import2013=parseFloat(data1[i]["val2013"])+parseFloat(import2013);
+       import2014=parseFloat(data1[i]["val2014"])+parseFloat(import2014);
+        import2015=parseFloat(data1[i]["val2015"])+parseFloat(import2015);
+         import2016=parseFloat(data1[i]["val2016"])+parseFloat(import2016);
+
+         export2013= parseFloat(export2013.toFixed(2));
+          export2014= parseFloat(export2014.toFixed(2));
+           export2015= parseFloat(export2015.toFixed(2)); 
+            export2016= parseFloat(export2016.toFixed(2));
+
+        import2013= parseFloat(import2013.toFixed(2));
+          import2014= parseFloat(import2014.toFixed(2));
+           import2015= parseFloat(import2015.toFixed(2)); 
+            import2016= parseFloat(import2016.toFixed(2));
+
      // importyear[j]=
       
       // console.log(j+data[i]["statename"]+' '+ parseFloat(exportsum[j]));
