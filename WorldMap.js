@@ -14,7 +14,7 @@ var countries = [];
 //Draw world map
 function createWorldMap (state) {
     map = new Datamap({
-                        element: document.getElementById("basic_choropleth"),
+                        element: document.getElementById("WorldMap"),
                         projection: 'mercator',
                          setProjection: function(){
 
