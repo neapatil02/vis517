@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.2/umd/popper.min.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css">
+<style type="text/css">
+.inline-blocj {
+}
+</style>
+<script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.js"></script>
+	
+<meta charset="utf-8">
+<title>Nav</title>
+<script type="text/javascript" src="nav.js"></script>
+</head>
+
+<body><form>
+<h5>Navigation</h5>
+<aside class="col-sm-12">
+	<label>Year : </label>
+	<select id="Years">
+	<option value="0">All</option>
+	<option value="2013">2013</option>
+	<option value="2014">2014</option>
+	<option value="2015">2015</option>
+	<option value="2016">2016</option>
+	</select>
+	<label> Process : </label>
+	<table width="200" >
+	  <tr>
+	    <td><label>
+	      <input type="radio" name="Process" value="import" id="Process_0">
+	      Import</label></td>
+	    <td><label>
+	      <input type="radio" name="Process" value="export" id="Process_1">
+	      Export</label></td>
+      </tr>
+    </table>
+<label>  HS Codes : </label>
+	<select id="rangeHsCode">
+	</select>
+	<select id="hsCode">
+	</select>
+	</aside>
+<div>&nbsp;</div>
+	<input type="button" value="Go">
+</form
+</body>
+	<script type="application/javascript">
+	window.onload = function()
+	{
+		$("#rangeHsCode").change(function(e){
+			navjs.onRangeHsCodeChange(this);
+		});
+		navjs.readHSCodes();
+		navjs.bindRangeHsCodeDdl();
+	}
+	</script>
+</html>
