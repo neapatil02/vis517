@@ -1,6 +1,3 @@
- var range = "10-200";
- var year= "2015";
- var process= "export";
 
 function PopulateUSMap (range, year, process) {
 
@@ -713,6 +710,16 @@ var election = new Datamap({
 
   element: document.getElementById('USMap'),
   scope: 'usa',
+  done: function(datamap) {
+            datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
+                alert(geography.properties.name);
+                state = geography.properties.name;
+                $("#ComChart").empty();
+                $("#WorldMap").empty();
+                Comchart();
+                updateWorldMap(process, year, state);
+            });
+          },
  geographyConfig: {
             borderColor: '#DEDEDE',
             highlightBorderWidth: 2,
@@ -728,25 +735,20 @@ var election = new Datamap({
                 if (!data) { return ; }
                 // tooltip content
                 if(process == "export"){
-               return '<div class="hoverinfo">' + "<h4>"+geo.properties.name+"</h4><table>" + 
-                "<tr><td>export:</td><td>"+ data.temp+"</td></tr>"
+                    return '<div class="hoverinfo">' + "<h4>"+geo.properties.name+"</h4><table>" + 
+                            "<tr><td>export:</td><td>"+ data.temp+"</td></tr>"
             }
             else{
- 			return '<div class="hoverinfo">' + "<h4>"+geo.properties.name+"</h4><table>" + 
-                "<tr><td>import:</td><td>"+ data.temp+"</td></tr>"
-            }
+     			          return '<div class="hoverinfo">' + "<h4>"+geo.properties.name+"</h4><table>" + 
+                      "<tr><td>import:</td><td>"+ data.temp+"</td></tr>"
+                }
+          }
           },
 
-  fills: {
-
-  defaultFill: '#ffffff'
-
- },
-
-
-data:dataset
-
-
+        fills: {
+        defaultFill: '#ffffff'
+       },
+        data:dataset
 });
 
 election.labels();
