@@ -52,10 +52,11 @@
 
  var j=0;
   var temp = [];
-
-
- var year= "2013";
+ var range = "10-200";
+ var year= "2015";
  var process= "export";
+
+
 
   d3.csv("export.csv", function(dataexp){
   d3.csv("import.csv",function(dataimp){
@@ -70,7 +71,8 @@ states.push({ code:statePaths[i].id, name : statePaths[i].properties.name });
 var dataForMap = [];
 
 // //Collecting commodity data
-var range = "20-28";
+
+
 var rangeValues = {};
 rangeValues.value = -1;
 if(range.indexOf("-") > 0)
@@ -86,45 +88,185 @@ else
   rangeValues.value = parseInt(range);
 }
 
-// for(var i=0;i<1430;i++)
-// {
-// debugger;
 
-//   var hsCode = dataimp[i].hs6.length == 6 ? dataimp[i].hs6.substring(0,2) : 
-//               dataimp[i].hs6.length == 5 ? dataimp[i].hs6.substring(0,1) : "0";
-// if(rangeValues.value == -1)
-// {
+//process condition to select data
+if(process== "import")
+{
+for(var i=0;i<1430;i++)
+{
+//debugger;
 
-//   if(hsCode >= rangeValues.min && hsCode <= rangeValues.max)
-//   {
-//     var data = dataimp[i];
-//     data.code = getStateCode(dataimp[i].statename);
-//     dataForMap.push(data);
-//   }
-// }
+  var hsCode = dataimp[i].hs6.length == 6 ? dataimp[i].hs6.substring(0,2) : 
+              dataimp[i].hs6.length == 5 ? dataimp[i].hs6.substring(0,1) : "0";
+if(rangeValues.value == -1)
+{
 
-// else
-//   {
-//     if(hsCode == rangeValues.value)
-//   { var data = dataimp[i];
-//     data.code = getStateCode(dataimp[i].statename);
-//     dataForMap.push(data);
-//   }
-// }
-// }
+  if(hsCode >= rangeValues.min && hsCode <= rangeValues.max)
+  {
+    var data = dataimp[i];
+    data.code = getStateCode(dataimp[i].statename);
+    dataForMap.push(data);
+
+  }
+}
+
+else
+  {
+    if(hsCode == rangeValues.value)
+  { var data = dataimp[i];
+    data.code = getStateCode(dataimp[i].statename);
+    dataForMap.push(data); 
+  }
+}
+}
+}
+
+if(process == "export")
+{
+  for(var i=0;i<1430;i++)
+{
+//debugger;
+
+  var hsCode = dataexp[i].hs6.length == 6 ? dataexp[i].hs6.substring(0,2) : 
+              dataexp[i].hs6.length == 5 ? dataexp[i].hs6.substring(0,1) : "0";
+if(rangeValues.value == -1)
+{
+
+  if(hsCode >= rangeValues.min && hsCode <= rangeValues.max)
+  {
+    var data = dataexp[i];
+    data.code = getStateCode(dataexp[i].statename);
+    dataForMap.push(data);
+
+  }
+}
+
+else
+  {
+    if(hsCode == rangeValues.value)
+  { var data = dataexp[i];
+    data.code = getStateCode(dataexp[i].statename);
+    dataForMap.push(data); 
+  }
+}
+}
+}
 
 //aggregated data for commodities
+
+var hash = {};
+var tempe;
+for (var h = 0; h < dataForMap.length; h++) {
+
+tempe = dataForMap[h].code;
+  
+ // hash[tempe] = dataForMap[h];
+  
+  // console.log(dataForMap[h]);
+  //  console.log(dataForMap[h].code);
+  //  console.log(hash[dataForMap[h].code].val2013);
+
+
+hash[tempe] = {};
+
+  hash[tempe].val2013 = 0;
+  hash[tempe].val2014 = 0;
+  hash[tempe].val2015 = 0;
+  hash[tempe].val2016 = 0;
+
+}
+
+for (var h = 0; h < dataForMap.length; h++) {
+  
+   var o = dataForMap[h];
+   //debugger;
+   var tempee;
+   tempee = dataForMap[h].code;
+  hash[tempee].code = dataForMap[h].code;
+  hash[tempee].val2013 = parseFloat(hash[tempee].val2013)+parseFloat(o.val2013);
+  hash[tempee].val2014 = parseFloat(hash[tempee].val2014)+parseFloat(o.val2014);
+  hash[tempee].val2015 = parseFloat(hash[tempee].val2015)+parseFloat(o.val2015);
+  hash[tempee].val2016 = parseFloat(hash[tempee].val2016)+parseFloat(o.val2016);
+  //debugger;
+
+}
+ 
+var aggregatedCommoditiesData = [];
+for (var key in hash) {
+   aggregatedCommoditiesData.push(hash[key])
+}
+
+//Creating Datamap compatible dataset
+
+ var dataset2={};
+//debugger;
+ var onlyValues1=[];
+for(var i=0;i<aggregatedCommoditiesData.length;i++)
+  //year condition
+onlyValues1[i] = aggregatedCommoditiesData[i].val2016;
+
+//debugger;
+// var onlyValues = dataset["export"];
+    var minValue1 = Math.min.apply(null, onlyValues1),
+        maxValue1 = Math.max.apply(null, onlyValues1);
+    var midvalue1 = (minValue1+maxValue1)/2;
+
+  var paletteScale1 = d3.scale.pow().exponent(0.3)
+            .domain([minValue1,maxValue1])
+            .range(["#ffffcc", "#800026"]); 
+
+
+//debugger;
+
+      aggregatedCommoditiesData.forEach(function(item){ //
+        // item example value ["USA", 70]
+
+        if(year==2013){
+        var iso = item["code"],
+                value1 = item["val2013"];
+              }
+
+               if(year==2014){
+        var iso = item["code"],
+                value1 = item["val2014"];
+              }
+
+               if(year==2015){
+        var iso = item["code"],
+                value1 = item["val2015"];
+              }
+
+               if(year==2016){
+        var iso = item["code"],
+                value1 = item["val2016"];
+              }
+               value1 = parseFloat(value1).toFixed(2);
+             
+        dataset2[iso] = { temp: value1, fillColor: paletteScale1(value1) };
+    });
+//debugger;
+
+ // function getJsonLength(dataset2){
+ //  var jsonLength = 0;
+ //  for(var item in dataset2){
+ //    jsonLength++;
+ //    }
+ //    console.log(jsonLength);
+   
+ //   }
+ //   getJsonLength(dataset2);
+
 
 
 
 function getStateCode(statename)
 {
-  for(i=0 ; i < states.length; i++)
+  for(var g=0 ; g < states.length; g++)
   {
 
-    if(states[i].name.toUpperCase() == statename.toUpperCase())
+    if(states[g].name.toUpperCase() == statename.toUpperCase())
     {
-      return states[i].code;
+      return states[g].code;
     }
   }
   return "";
@@ -265,8 +407,8 @@ for(var i=0;i<1430;i++)
 
     //debugger;
      
-    
-console.log(temp);
+  
+
 
      var dataset = [
   {
@@ -579,8 +721,7 @@ console.log(temp);
 ]
 
    
-
- var dataset1={};
+  var dataset1={};
 
  var onlyValues=[];
 for(var i=0;i<dataset.length;i++)
@@ -605,7 +746,8 @@ onlyValues[i] = dataset[i].temp;
         dataset1[iso] = { temp: value, fillColor: paletteScale(value) };
     });
 
-
+//visualizeUSMap(dataset1);
+ 
 // dataset[iso] = { numberOfThings: value, fillColor: paletteScale(value) };
 
 
@@ -615,7 +757,12 @@ onlyValues[i] = dataset[i].temp;
 
 //update=2013
 
+if(range) 
+visualizeUSMap(dataset2);
+else
+visualizeUSMap(dataset1);
 
+function visualizeUSMap(dataset){
 
 var election = new Datamap({
 
@@ -642,12 +789,12 @@ var election = new Datamap({
 
   fills: {
 
-  defaultFill: '#EDDC4E'
+  defaultFill: '#ffffff'
 
  },
 
 
-data:dataset1
+data:dataset
 
 
 });
@@ -655,6 +802,7 @@ data:dataset1
 election.labels();
 j=0;
 temp = [];
+}
 });
 });
 </script>
