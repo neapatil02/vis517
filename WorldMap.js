@@ -1,21 +1,20 @@
 
-var process = "",state = "", year = 0;
-
 function updateWorldMap(p, y, s){
   process = p;
   year = y;
   state = s;
-  createWorldMap();
-  
-  readDataFromFile();
-  dataToPlot();
+  createWorldMap(state);
+  if(state.length > 0){
+      readDataFromFile(process);
+      dataToPlot(year);
+  }
 }
 
 var countries = [];
 //Draw world map
-function createWorldMap () {
+function createWorldMap (state) {
     map = new Datamap({
-                        element: document.getElementById("WorldMap"),
+                        element: document.getElementById("basic_choropleth"),
                         projection: 'mercator',
                          setProjection: function(){
 
@@ -63,21 +62,20 @@ function createWorldMap () {
                         });
     countries = Datamap.prototype.worldTopo.objects.world.geometries;
     countryHash(countries);
-    console.log(countryHashList);
-}
 
 var countryHashList = [];
 function countryHash(countries)
 {
-
+countryHashList = [];
   countries.forEach(function(e)
   {
     countryHashList.push({name : e.properties.name, code : e.id});
   });
+  debugger;
 }
 
 var exportTopCountries = [];
-function readDataFromFile()
+function readDataFromFile(process)
 {
   if(process == "export")
   {
@@ -91,16 +89,18 @@ function readDataFromFile()
 });
 }
 else{
-  $.ajax({
-  url: 'data/ImportCountry.json',
-  async: false,
-  dataType: 'json',
-  success: function (response) {
-    exportTopCountries = response;
-  }
-});
+      $.ajax({
+      url: 'data/ImportCountry.json',
+      async: false,
+      dataType: 'json',
+      success: function (response) {
+        exportTopCountries = response;
+      }
+    });
+    }
 }
-function dataToPlot()
+}
+function dataToPlot(year)
 {
   
 
@@ -118,18 +118,18 @@ function dataToPlot()
           return false;
         }
       });
-      plotData(top25Countries);
+      plotData(top25Countries, year);
       console.log(top25Countries);
 }
 
-function plotData(top25Countries)
+function plotData(top25Countries, year)
 {
 
-generateDataForChoropleth(top25Countries);
+generateDataForChoropleth(top25Countries, year);
 
 }
 
-function generateDataForChoropleth(top25Countries)
+function generateDataForChoropleth(top25Countries, year)
 {
 
 var color = d3.scale.threshold()
@@ -173,7 +173,7 @@ var color = d3.scale.threshold()
            cl = color(0);
         }
         data[e.code] = { fillColor : cl,
-                          dollarValue : calcValueAccordingToYear(c)};
+                          dollarValue : calcValueAccordingToYear(c,year)};
         labelData[e.code] = rank;
       }
     });
@@ -184,7 +184,7 @@ var color = d3.scale.threshold()
 
 }
 
-function calcValueAccordingToYear(data)
+function calcValueAccordingToYear(data,year)
 {
   debugger;
   var val = 0;
