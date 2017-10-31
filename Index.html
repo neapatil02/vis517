@@ -87,11 +87,18 @@ rect.background {
 <!-- USMap -->
 <script src="http://datamaps.github.io/scripts/d3.min.js"></script>
 <script src="http://datamaps.github.io/scripts/topojson.js"></script>
-<script src="http://datamaps.github.io/scripts/0.4.4/datamaps.usa.min.js"></script>
+<!-- <script src="http://datamaps.github.io/scripts/0.4.4/datamaps.usa.min.js"></script> -->
+ <script src="http://datamaps.github.io/scripts/0.5.8/datamaps.all.js?$$REVISION$$"></script>
 <!-- IETotal -->
 <script src="echarts.js"></script>
 <!-- Navigation -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.2/umd/popper.min.js"></script>
+
+<!-- World Map Scripts -->
+ <script src="https://d3js.org/d3-color.v1.min.js"></script>
+<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
 <script
   src="https://code.jquery.com/jquery-3.2.1.js"
   integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
@@ -136,7 +143,6 @@ rect.background {
 
 <script src="USMap.js"></script>
 
-<div id="WorldMap"></div>
 <script src="WorldMap.js"></script>
 
 <div class="row" style="height:1em!important;"></div>
@@ -224,10 +230,12 @@ rect.background {
   <em><p class="text-center">Data source: <a href="https://www.census.gov/foreign-trade/statistics/state/data/index.html"> US Census Foreign Trade statistics </a>.</p></em>
 </div>
 </div>
+
+<div id="WorldMap"></div>
 </body>
 <!-- Navigation -->
   <script type="application/javascript">
-     var range = "10-200";
+  var range = "10-200";
  var year= "2015";
  var process= "export";
  var state = "";
@@ -240,5 +248,17 @@ rect.background {
     navjs.readHSCodes();
     navjs.bindRangeHsCodeDdl();
   }
+
+  $(function(){
+  
+
+PopulateUSMap(range, year, process);
+$("#USMap").on('map-click', function(event, data) {
+   // data.geography is the geoJSON
+  alert( data.geography.id ); 
+});
+updateWorldMap(process, year, state);
+ComChart(process,state,year);
+})
   </script>
 </html>

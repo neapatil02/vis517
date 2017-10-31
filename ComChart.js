@@ -1,4 +1,4 @@
-
+function ComChart(process,state,year){
 //MY CODE
 // var margin = {top: 30, right: 120, bottom: 0, left: 400},
 var margin = {top: 30, right: 20, bottom: 0, left: 40},
@@ -53,7 +53,7 @@ svg.append("g")
 // });
 //> start connect with export /import
 
-var state="Alabama";
+// var state="Alabama";
 // var year=0;
 // var year=0;
 // var process="import";
@@ -356,4 +356,5 @@ function stack(i) {
     x0 += x(d.value);
     return tx;
   };
+}
 }

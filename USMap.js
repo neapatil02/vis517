@@ -716,7 +716,7 @@ var election = new Datamap({
                 state = geography.properties.name;
                 $("#ComChart").empty();
                 $("#WorldMap").empty();
-                Comchart();
+                ComChart(process,state,year);
                 updateWorldMap(process, year, state);
             });
           },
