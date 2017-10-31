@@ -1,8 +1,10 @@
 
 //MY CODE
-var margin = {top: 30, right: 120, bottom: 0, left: 400},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+// var margin = {top: 30, right: 120, bottom: 0, left: 400},
+var margin = {top: 30, right: 20, bottom: 0, left: 40},
+    // width = 960 - margin.left - margin.right,
+    width = 330 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
 
 var x = d3.scale.linear()
     .range([0, width]);
@@ -10,7 +12,7 @@ var x = d3.scale.linear()
 var barHeight = 20;
 
 var color = d3.scale.ordinal()
-    .range(["steelblue", "#ccc"]);
+    .range(["#007bff", "#007bff"]);
 
 var duration = 750,
     delay = 25;
@@ -292,6 +294,20 @@ function up(d) {
       .duration(end);
 }
 
+// Move to fron and move to back 
+d3.selection.prototype.moveToFront = function() {  
+      return this.each(function(){
+        this.parentNode.appendChild(this);
+      });
+    };
+    d3.selection.prototype.moveToBack = function() {  
+        return this.each(function() { 
+            var firstChild = this.parentNode.firstChild; 
+            if (firstChild) { 
+                this.parentNode.insertBefore(this, firstChild); 
+            } 
+        });
+    };
 // Creates a set of bars for the given data node, at the specified index.
 function bar(d) {
   var bar = svg.insert("g", ".y.axis")
@@ -302,18 +318,32 @@ function bar(d) {
     .enter().append("g")
       .style("cursor", function(d) { return !d.children ? null : "pointer"; })
       .on("click", down);
-//Write a text 
-  bar.append("text")
+  //Write a text 
+  bar.append("text1")
+      // .attr("x", -6)
+      .attr("x", 2)
+      .attr("y", barHeight / 2)
+      .attr("dy", ".35em")
+      .style("text-anchor", "start")
+      .text(function(d) { return d.name });
+      // .text(function(d) { return d.code+" "+d.name; });
+      // .on('mouseover', function(d) {
+      //       d3.select(this).moveToFront();
+      //   });
+bar.append("text")
+
       .attr("x", -6)
       .attr("y", barHeight / 2)
       .attr("dy", ".35em")
       .style("text-anchor", "end")
       .text(function(d) { return d.code });
-      // .text(function(d) { return d.code+" "+d.name; });
 
   bar.append("rect")
       .attr("width", function(d) { return x(d.value); })
-      .attr("height", barHeight);
+      .attr("height", barHeight)
+      .on('mouseover', function(d) {
+            d3.select(this).moveToBack();
+        });
 
   return bar;
  }

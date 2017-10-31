@@ -1,9 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- MODAL -->
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $(window).on('load',function(){
+        $('#myModal').modal('show');
+    });
+</script>
 <meta charset="utf-8">
 <title>Project 2</title>
 <style>
+        body{
+            font-family: "Raleway", Arial, sans-serif !important;
+        }
+        label{
+         /*font-style:italic !important;*/
+        }
+        form{
+          background-color:#f9f9f9!important; 
+          padding:1em!important;
+
+        }
 /*ComChart*/
 text {
   font: 10px sans-serif;
@@ -50,30 +71,169 @@ rect.background {
     margin:0;
     font-size:14px;
   }
-
+/*NAV*/
+.inline-blocj {
+}
+/*LAYOUT*/
 </style>
+
 </head>
 <body>
+  <!-- FONT -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="//d3js.org/d3.v3.min.js"></script>
+<script src="http://datamaps.github.io/scripts/d3.min.js"></script>
 <!-- USMap -->
 <script src="http://datamaps.github.io/scripts/d3.min.js"></script>
 <script src="http://datamaps.github.io/scripts/topojson.js"></script>
 <script src="http://datamaps.github.io/scripts/0.4.4/datamaps.usa.min.js"></script>
+<!-- IETotal -->
+<script src="echarts.js"></script>
+<!-- Navigation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.2/umd/popper.min.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css">
+<script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.js"></script>
 
-<div id="navigation"></div>
-<!-- <script src="navigation.js"></script> -->
-<div id="IETotal"></div>
-<!-- <script src="IETotal.js"></script> -->
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">What's this website about</h4>
+        </div>
+        <div class="modal-body">
+          <p>The visualization of this web-site is dedicated by US Foreign Trade statistics from 2013 to 2016 year.<br>
+            Let's start with overview export and import across US from 2013-2016.</p>
+<div id="IETotal" style="width: 600px;height:400px;"></div>
+<div class="text-center"><em>Overview export and import across US from 2013-2016</em><div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<div id="USMap" style="position: relative; width: 1000px; height: 800px;"></div>
+
+
+ <!--  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Large Modal</button> -->
+
+
+
+</div>
+<script src="nav.js"></script>
+
+
+<script src="IETotal.js"></script>
+
+
 <script src="USMap.js"></script>
-<div id="ComChart"></div>
-<script src="ComChart.js"></script>
-<!-- <script src="ExampleComChart.js"></script> -->
+
 <div id="WorldMap"></div>
-<!-- <script src="WorldMap.js"></script> -->
+<script src="WorldMap.js"></script>
+
+<div class="row" style="height:1em!important;"></div>
+<h4><p class="text-center">  US Census Foreign Trade statistics</p></h4>
+<p class="text-center"> <em>Made by Neha Patit, Han Wang, Anna Cherenshchykova</em><br>
+
+<span class="description" id="gray"> <a href="http://goo.gl/exqqk3">Documentation page</a> and <a href="https://goo.gl/kS4f2d">video </a></p>
+  
+  <form>
+<div class="row" style="">
+
+<div  class="col-md-2" >
+  <div class="text-center">
+  <label><u>Year :</u> &nbsp;</label>
+  <select id="Years">
+  <option value="0">All</option>
+  <option value="2013">2013</option>
+  <option value="2014">2014</option>
+  <option value="2015">2015</option>
+  <option value="2016">2016</option>
+  </select>
+</div>
+</div>
+
+<div class="col-md-8" >
+  <div class="text-center font-weight-bold">
+      <label > <u>Process </u>: &nbsp;</label>
+<label>
+        <input type="radio" name="Process" value="import" id="Process_0">
+        Import&nbsp; OR &nbsp;</label>
+      <td><label>
+        <input type="radio" name="Process" value="export" id="Process_1">
+        Export</label>
+
+  </div>
+</div>
 
 
 
+<div class="col-md-2" >
+  <div class="text-center">
+   <!--  <input type="button" value="Go"> -->
+   <button type="button" value="Go"class="btn btn-primary">Update</button>
+  </div>
+</div>
+
+</div>
+
+<div class="row" >
+  <div class="col-md-12" >
+<div class="text-left">
+<label> <u> HS Codes</u> :&nbsp; </label>
+  <select id="rangeHsCode">
+  </select>
+  <select id="hsCode">
+  </select>
+  </div>
+  </div>
+</div>
+
+</form>
+
+<div class="row" style="height:15px!important;"></div>
+
+<div class="row">
+<div class="col-md-8" >
+<h6><p class="text-center"> US Map</p></h6>
+</div>
+<div class="col-md-4" >
+<h6><p class="text-center"> Commodities</p></h6>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-8" id="USMap"></div>
+<div class="col-md-4" id="ComChart"></div>
+<script src="ComChart.js"></script>
+</div>
+<div class="row" style="height:1em!important;"></div>
+<div class="row">
+<div class="col-md-8 text-left">
+<!-- Trigger the modal with a button -->
+<a class="btn" data-toggle="modal" href="#myModal" >Overview export and import across US from 2013-2016</a></div>
+<div class="col-md-4" >
+  <em><p class="text-center">Data source: <a href="https://www.census.gov/foreign-trade/statistics/state/data/index.html"> US Census Foreign Trade statistics </a>.</p></em>
+</div>
+</div>
 </body>
+<!-- Navigation -->
+  <script type="application/javascript">
+  window.onload = function()
+  {
+    $("#rangeHsCode").change(function(e){
+      navjs.onRangeHsCodeChange(this);
+    });
+    navjs.readHSCodes();
+    navjs.bindRangeHsCodeDdl();
+  }
+  </script>
 </html>
