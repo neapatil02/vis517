@@ -41,27 +41,37 @@ function createWorldMap (state) {
                                 function redraw() {
                                     datamap.svg.selectAll("g").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
                                 }
+
+                                // datamap.svg.selectAll("path").on('mouseover', function(info) {debugger;
+                                
+                                // });
                             },
                           geographyConfig: {
                                             popupTemplate: function(geo, data) {
                                               debugger;
+                                              $("#WorldMapInfo").empty();
                                               if(data != null){
-                                                return ['<div class="hoverinfo"><strong>',
+                                                $("#WorldMapInfo").append(
+                                                 ['<div class="hoverinfo1" style="display:block"><strong>',
                                                         'Total Dollars ' + state +' traded with ' + geo.properties.name,
                                                         ': ' + data.dollarValue,
-                                                        '</strong></div>'].join('');
+                                                        '</strong></div>'].join(''));
+
+                                                        return "";
                                                       }
                                                       else
                                                       {
-                                                        return ['<div class="hoverinfo"><strong>',
+                                                         $("#WorldMapInfo").append( ['<div class="hoverinfo1"><strong>',
                                                         geo.properties.name,
-                                                        '</strong></div>'].join('');
+                                                        '</strong></div>'].join(''));
+                                                        return "";
                                                       }
                                             }
                                      }
                         });
     countries = Datamap.prototype.worldTopo.objects.world.geometries;
     countryHash(countries);
+  }
 
 var countryHashList = [];
 function countryHash(countries)
@@ -71,26 +81,15 @@ countryHashList = [];
   {
     countryHashList.push({name : e.properties.name, code : e.id});
   });
-  debugger;
 }
 
 var exportTopCountries = [];
 function readDataFromFile(process)
 {
   if(process == "export")
-  {
-  $.ajax({
-  url: 'data/ExportCountry.json',
-  async: false,
-  dataType: 'json',
-  success: function (response) {
-    exportTopCountries = response;
-  }
-});
-}
-else{
+      {
       $.ajax({
-      url: 'data/ImportCountry.json',
+      url: 'data/ExportCountry.json',
       async: false,
       dataType: 'json',
       success: function (response) {
@@ -98,8 +97,18 @@ else{
       }
     });
     }
+    else{
+          $.ajax({
+          url: 'data/ImportCountry.json',
+          async: false,
+          dataType: 'json',
+          success: function (response) {
+            exportTopCountries = response;
+          }
+        });
+        }
 }
-}
+
 function dataToPlot(year)
 {
   
@@ -170,11 +179,11 @@ var color = d3.scale.threshold()
         }
          if(rank >= 21 && rank <= 25)
         {
-           cl = color(0);
+           cl = color(1);
         }
         data[e.code] = { fillColor : cl,
                           dollarValue : calcValueAccordingToYear(c,year)};
-        labelData[e.code] = rank;
+        labelData[e.code] = " ";
       }
     });
   });
@@ -186,7 +195,6 @@ var color = d3.scale.threshold()
 
 function calcValueAccordingToYear(data,year)
 {
-  debugger;
   var val = 0;
   switch(year)
   {
