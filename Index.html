@@ -25,8 +25,8 @@
           padding:1em!important;
 
         }
-        #var{
-        color:#7d0022;
+        .statename{
+        color:rgb(0, 123, 255);
 
         }
 /*ComChart*/
@@ -223,10 +223,12 @@ rect.background {
 
 <div class="row">
 <div class="col-md-8" >
-<h6><p class="text-center"> US Map</p></h6>
+<h6><p class="text-center"> US Map
+</br><small><em>In order to start just pick a state</em></small></p></h6>
+
 </div>
 <div class="col-md-4" >
-<h6><p class="text-center"> Top 25 Commodities for particular state</br><small><em>Commodity represents as first two numbers of HS CODE</em></small></p></h6>
+<h6><p class="text-center"> Top 25 Commodities for <span class="statename"></span></br><small><em>Commodity represents as first two numbers of HS CODE</em></small></p></h6>
 </div>
 </div>
 
@@ -239,10 +241,13 @@ rect.background {
 
 <div class="row">
 <div class="col-md-8" >
-<h6><p class="text-center"> Top 25 Country Traders for particular state</p></h6>
+<h6><p class="text-center"> Top 25 Country Traders for 
+  <span class="statename"></span>
+
+ </p></h6>
 </div>
 <div class="col-md-4" >
-<h6><p class="text-center"> Export and Import</em></small></p></h6>
+<h6><p class="text-center"> Export and Import for <span class="statename"></span></p></h6>
 </div>
 </div>
 
