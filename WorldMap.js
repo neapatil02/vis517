@@ -28,7 +28,7 @@ function createWorldMap (state) {
                                             return {projection:projection , path : path};
                          },
                         fills: {
-                                defaultFill: "grey",
+                                defaultFill: "#cccccc",
                                 authorHasTraveledTo: "#fa0fa0"
                               },
                         width: 700,
