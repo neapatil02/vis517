@@ -182,6 +182,12 @@ onlyValues1[i] = aggregatedCommoditiesData[i].val2016;
         var iso = item["code"],
                 value1 = item["val2016"];
               }
+        //cc
+        if(year==0){
+        var iso = item["code"],
+                value1 = parseFloat(item["val2016"]) + parseFloat(item["val2015"])+ parseFloat(item["val2014"])+ parseFloat(item["val2013"]);
+              }
+        
                value1 = parseFloat(value1).toFixed(2);
              
         dataset2[iso] = { temp: value1, fillColor: paletteScale1(value1) };
