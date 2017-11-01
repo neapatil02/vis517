@@ -47,6 +47,7 @@ function createWorldMap (state) {
                                             popupTemplate: function(geo, data) {
                                               $("#WorldMapInfo").empty();
                                               if(data != null){
+                                                debugger;
                                                 $("#WorldMapInfo").append(
                                                  ['<div class="hoverinfo1" style="display:block"><strong>',
                                                         'Total Dollars ' + state +' traded with ' + geo.properties.name,
