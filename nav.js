@@ -228,12 +228,12 @@ var navjs = function(){
 	nv.bindRangeHsCodeDdl = function()
 	{
 		var ddl = $("#rangeHsCode");
-		$("#hsCode").empty();
+		$("#hsCode").empty().append(new Option("Select HS Code..",""));
 		ddl.empty();
 		ddl.append(new Option("Select Category of HS Code..",""));
 		hsCodes.forEach(function(e)
 					   {
-			ddl.append(new Option(e.name, e.code));
+			ddl.append(new Option(e.code  + " : "+e.name, e.code));
 		});
 	};
 	
@@ -255,7 +255,7 @@ var navjs = function(){
 		ddl.append(new Option("Select HS Code..",""));
 		data.forEach(function(e)
 					{
-			ddl.append(new Option(e.name, e.code));
+			ddl.append(new Option(e.code + " : "+e.name, e.code));
 		});
 	};
 	

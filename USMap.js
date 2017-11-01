@@ -710,6 +710,8 @@ var election = new Datamap({
 
   element: document.getElementById('USMap'),
   scope: 'usa',
+   width: 930,
+   height: 350,
   done: function(datamap) {
             datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
                 alert(geography.properties.name);

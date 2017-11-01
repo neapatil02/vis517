@@ -105,7 +105,7 @@ rect.background {
   crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css">
 <script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.js"></script>
-
+<script type="text/javascript" src="index.js"></script>
 <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-lg">
@@ -170,9 +170,8 @@ rect.background {
 <div class="col-md-8" >
   <div class="text-center font-weight-bold">
       <label > <u>Process </u>: &nbsp;</label>
-<label>
-        <input type="radio" name="Process" value="import" id="Process_0">
-        Import&nbsp; OR &nbsp;</label>
+<label>Import
+        <input type="radio" name="Process" value="import" id="Process_0" checked="checked">
       <td><label>
         <input type="radio" name="Process" value="export" id="Process_1">
         Export</label>
@@ -185,7 +184,7 @@ rect.background {
 <div class="col-md-2" >
   <div class="text-center">
    <!--  <input type="button" value="Go"> -->
-   <button type="button" value="Go"class="btn btn-primary">Update</button>
+   <button type="button" value="Go"class="btn btn-primary" id = "btnUpdate">Update</button>
   </div>
 </div>
 
@@ -250,13 +249,12 @@ rect.background {
   }
 
   $(function(){
-  
+
+$("#btnUpdate").on('click',function(){
+onUpdateButtonClick();
+});
 
 PopulateUSMap(range, year, process);
-$("#USMap").on('map-click', function(event, data) {
-   // data.geography is the geoJSON
-  alert( data.geography.id ); 
-});
 updateWorldMap(process, year, state);
 ComChart(process,state,year);
 })
