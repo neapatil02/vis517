@@ -318,18 +318,17 @@ function bar(d) {
     .enter().append("g")
       .style("cursor", function(d) { return !d.children ? null : "pointer"; })
       .on("click", down);
+    //   .on("mouseover", function() { tooltip.style("display", null); })
+    //   .on("mouseout", function() { tooltip.style("display", "none"); })
+    // .on("mousemove", function(d) {
+    // var xPosition = d3.mouse(this)[0] - 15;
+    // var yPosition = d3.mouse(this)[1] - 25;
+    // tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
+    // tooltip.select("text").text("ghsajdgja");
+  // });
   //Write a text 
-  bar.append("text1")
-      // .attr("x", -6)
-      .attr("x", 2)
-      .attr("y", barHeight / 2)
-      .attr("dy", ".35em")
-      .style("text-anchor", "start")
-      .text(function(d) { return d.name });
-      // .text(function(d) { return d.code+" "+d.name; });
-      // .on('mouseover', function(d) {
-      //       d3.select(this).moveToFront();
-      //   });
+
+
 bar.append("text")
 
       .attr("x", -6)
@@ -341,9 +340,17 @@ bar.append("text")
   bar.append("rect")
       .attr("width", function(d) { return x(d.value); })
       .attr("height", barHeight)
-      .on('mouseover', function(d) {
-            d3.select(this).moveToBack();
-        });
+      // .on('mouseover', function(d) {
+      //       d3.select(this).moveToBack();
+      //   })
+      .on("mouseover", function() { tooltip.style("display", null); })
+      .on("mouseout", function() { tooltip.style("display", "none"); })
+    .on("mousemove", function(d) {
+    var xPosition = d3.mouse(this)[0] - 15;
+    var yPosition = d3.mouse(this)[1] - 25;
+    tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
+    tooltip.select("text").text("ghsajdgja");
+  });
 
   return bar;
  }
@@ -357,4 +364,26 @@ function stack(i) {
     return tx;
   };
 }
+<<<<<<< Updated upstream
 }
+=======
+
+// Prep the tooltip bits, initial display is hidden
+var tooltip = svg.append("g")
+  .attr("class", "tooltip")
+  .style("display", "none");
+    
+// tooltip.append("rect")
+//   .attr("width", 30)
+//   .attr("height", 20)
+//   .attr("fill", "white")
+//   .style("opacity", 0.5);
+
+tooltip.append("text")
+  .attr("x", 15)
+  .attr("dy", "1.2em")
+  .style("text-anchor", "middle")
+  .attr("font-size", "12px")
+  .attr("color", "black")
+  .attr("font-weight", "bold");
+>>>>>>> Stashed changes
