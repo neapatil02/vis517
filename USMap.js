@@ -218,7 +218,7 @@ function getStateCode(statename)
 
 for(var i=0;i<1430;i++)
 {
-  if(year=="2013-2016"&&process=="export"){
+  if(year=="0"&&process=="export"){
   // debugger;
 
   if(dataexp[i]["abbreviatn"]=='World')
@@ -277,7 +277,7 @@ for(var i=0;i<1430;i++)
  }
 
 
-  if(year=="2013-2016"&&process=="import"){
+  if(year=="0"&&process=="import"){
   // debugger;
 
   if(dataexp[i]["abbreviatn"]=='World')
@@ -710,19 +710,20 @@ var election = new Datamap({
 
   element: document.getElementById('USMap'),
   scope: 'usa',
-   width: 930,
-   height: 350,
+   width: 730,
+   height: 450,
   done: function(datamap) {
             datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
-                alert(geography.properties.name);
+               // alert(geography.properties.name);
                 state = geography.properties.name;
                 $("#ComChart").empty();
                 $("#WorldMap").empty();
                 ComChart(process,state,year);
                 updateWorldMap(process, year, state);
-                $(".statename").text(state);
+                $(".statename").text(" for " + state);
                  $("path.changeBorder").removeClass("changeBorder").addClass("changeBorderBack");
                 $("path."+geography.id).addClass("changeBorder");
+                Ietotalchart();
 
             });
           },

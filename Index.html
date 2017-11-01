@@ -39,7 +39,7 @@ rect.background {
 }
 
 .changeBorder{
-  stroke : #59001a !important;
+  stroke : rgb(0, 123, 255) !important;
   stroke-width : 3px !important;
 }
 
@@ -187,9 +187,9 @@ rect.background {
       <label > <u>Process </u>: &nbsp;</label>
 <label>Import
         <input type="radio" name="Process" value="import" id="Process_0" checked="checked">
-      <td><label>
+      <td><label>Export
         <input type="radio" name="Process" value="export" id="Process_1">
-        Export</label>
+        </label>
 
   </div>
 </div>
@@ -228,35 +228,35 @@ rect.background {
 
 </div>
 <div class="col-md-4" >
-<h6><p class="text-center"> Top 25 Commodities for <span class="statename"></span></br><small><em>Commodity represents as first two numbers of HS CODE</em></small></p></h6>
+<h6><p class="text-center"> Top 25 Commodities <span class="statename"></span></br><small><em>Commodity represents as first two numbers of HS CODE</em></small></p></h6>
 </div>
 </div>
 
 <div class="row">
 <div class="col-md-8" id="USMap"></div>
 <div class="col-md-4" id="ComChart"></div>
-<script src="ComChart.js"></script>
+<script src="ComChart.js?$$REVISION$$"></script>
 </div>
 <div class="row" style="height:1em!important;"></div>
 
 <div class="row">
 <div class="col-md-8" >
-<h6><p class="text-center"> Top 25 Country Traders for 
+<h6><p class="text-center"> Top 25 Country Traders 
   <span class="statename"></span>
 
  </p></h6>
 </div>
 <div class="col-md-4" >
-<h6><p class="text-center"> Export and Import for <span class="statename"></span></p></h6>
+<h6><p class="left-align"> Export and Import<span class="statename"></span></p></h6>
 </div>
 </div>
 
 <div class="row" >
-<div class="col-md-4">
+<div class="col-md-6">
 <span id="WorldMapInfo" class="text-center" style="color:rgb(0, 123, 255);"></span>
 <div id="WorldMap" ></div>
 </div>
-<div class="col-md-8 ">
+<div class="col-md-4 ">
 <div id="IETotal" style="width: 600px;height:400px; float: left; margin-left:250px;"></div>
 
 </div>
@@ -277,9 +277,9 @@ rect.background {
 </body>
 <!-- Navigation -->
   <script type="application/javascript">
-  var range = "10-200";
- var year= "2015";
- var process= "export";
+  var range = "";
+ var year= "0";
+ var process= "import";
  var state = "";
     
   window.onload = function()
@@ -300,6 +300,7 @@ onUpdateButtonClick();
 PopulateUSMap(range, year, process);
 updateWorldMap(process, year, state);
 ComChart(process,state,year);
+Ietotalchart();
 })
   </script>
 </html>
