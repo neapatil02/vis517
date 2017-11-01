@@ -50,8 +50,8 @@ function createWorldMap (state) {
                                                 debugger;
                                                 $("#WorldMapInfo").append(
                                                  ['<div class="hoverinfo1" style="display:block"><strong>',
-                                                        'Total Dollars ' + state +' traded with ' + geo.properties.name,
-                                                        ': ' + data.dollarValue,
+                                                        'Total Amount ' + state +' traded with ' + geo.properties.name,
+                                                        ': $' + data.dollarValue,
                                                         '</strong></div>'].join(''));
 
                                                         return "";
