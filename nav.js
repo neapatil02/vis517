@@ -249,7 +249,6 @@ var navjs = function(){
 					return false;
 				}
 		});
-		debugger;
 		var ddl = $("#hsCode");
 		ddl.empty();
 		ddl.append(new Option("Select HS Code..",""));
