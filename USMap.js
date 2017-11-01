@@ -720,6 +720,9 @@ var election = new Datamap({
                 $("#WorldMap").empty();
                 ComChart(process,state,year);
                 updateWorldMap(process, year, state);
+                 $("path.changeBorder").removeClass("changeBorder").addClass("changeBorderBack");
+                $("path."+geography.id).addClass("changeBorder");
+
             });
           },
  geographyConfig: {
